@@ -96,12 +96,12 @@ app.post("/evaluar", checkAccess, async (req, res) => {
 IDEA: "${idea.trim()}"
 FORMATO: ${formato}
 
-Evalúa estos 5 criterios. Usa la herramienta de búsqueda web SOLO para el criterio de tendencia (verifica si el tema está siendo hablado AHORA en noticias o redes).
+Evalúa estos 5 criterios con tu conocimiento general (sin buscar en la web).
 
 1. FILTRO 5 AÑOS (0 a 2.0 puntos): ¿Un niño de 5 años entendería esta idea/temática? Si es totalmente simple y universal: 2.0. Si requiere algo de contexto: 0.5-1.5. Si es técnica o de nicho: 0.
 2. FILTRO 100 PERSONAS (0 a 2.0 puntos): Si le cuentas esta idea a 100 personas random (viejos, jóvenes, hombres, mujeres, de todo), ¿a cuántos les interesaría? Interés masivo: 2.0. Interés parcial: 0.5-1.5. Solo nicho: 0.
 3. MERCADO VIRAL (0 o 1.5 puntos): ¿Pertenece claramente a Salud, Sexo (ligar, relaciones, comunicación), Dinero o Desarrollo personal? Si sí: 1.5. Si es tangencial: 0.5-1.0. Si no: 0.
-4. TENDENCIA (0 a 1.5 puntos): BUSCA EN LA WEB si esta temática está en tendencia o en noticias AHORA. Tendencia fuerte actual: 1.5. Algo de conversación: 0.5-1.0. No es tendencia: 0.
+4. TENDENCIA (0 a 1.5 puntos): Basándote en tu conocimiento general, ¿esta temática suele ser de las que generan conversación constante o cíclica (no necesariamente noticia del momento)? Tendencia fuerte/recurrente: 1.5. Algo de relevancia: 0.5-1.0. No es tendencia: 0.
 5. CONTROVERSIA (0 a 1.5 puntos): ¿La idea genera controversia o va contra una creencia popular? Muy controversial: 1.5. Algo polémica: 0.5-1.0. Neutral/segura: 0.
 
 Sé estricto y realista. La mayoría de ideas NO son virales. No regales puntos.
@@ -128,7 +128,6 @@ Responde ÚNICAMENTE con un objeto JSON válido, sin markdown, sin backticks, si
         model: "claude-sonnet-4-6",
         max_tokens: 1000,
         messages: [{ role: "user", content: prompt }],
-        tools: [{ type: "web_search_20250305", name: "web_search" }],
       }),
     });
 
