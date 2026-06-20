@@ -57,6 +57,11 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok", usageToday: usageCount, limit: DAILY_LIMIT });
 });
 
+// ====== Endpoint para verificar la clave de acceso (login) ======
+app.post("/verificar-acceso", checkAccess, (req, res) => {
+  res.json({ ok: true, usageToday: usageCount, limit: DAILY_LIMIT });
+});
+
 // ====== Endpoint principal: evaluar idea ======
 app.post("/evaluar", checkAccess, async (req, res) => {
   const { idea, formato, refViral } = req.body;
