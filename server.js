@@ -6,7 +6,16 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.use(cors()); // En producción, restringe esto a tu dominio del frontend
+
+// CORS explícito: permite peticiones desde cualquier origen (incluyendo el iframe de Artifacts de Claude.ai)
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "x-access-key"],
+}));
+// Responde explícitamente a las peticiones OPTIONS (preflight) para todas las rutas
+app.options("*", cors());
+
 app.use(express.json({ limit: "1mb" }));
 
 // ====== VARIABLES DE ENTORNO (configúralas en Railway, NO aquí) ======
